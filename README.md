@@ -84,13 +84,19 @@ const CONFIG = {
 3. 在页面上依次选择你的 **校区 -> 楼栋 -> 房间**。
 4. 观察名为 `getThirdData` 的网络请求，查看其 `Payload` (请求负载) 中的表单数据，将对应的值填入 `CONFIG` 中即可。
 
-### 🤖 关于 OCR 接口
 
-由于统一身份认证登录必须输入图形验证码，本脚本采用调用第三方 OCR API 的方式解决。
+## 🤖 验证码识别 (OCR) 部署指南
 
-* API 规范：接收 JSON 格式的 `{"image": "base64编码的图片"}`，返回结果包含 `{"result": "识别出的4位字母"}`。
-* 你可以使用 Python (如 `ddddocr` 库) 自己搭建一个极简的服务端，或者对接市面上免费的打码 API。
+由于学校的统一身份认证 (CAS) 强制要求输入图形验证码，本脚本依赖第三方 OCR 接口进行自动识别。我们强烈推荐使用开源的 [sml2h3/ddddocr](https://github.com/sml2h3/ddddocr) 方案。
 
+为了方便大家，这里提供最快速的 Docker 部署方式（你需要有一台云服务器或软路由/NAS）：
+
+### 一键部署 OCR API
+你可以使用社区封装好的 ddddocr API 镜像，只需在你的服务器终端运行以下命令：
+
+```bash
+# 拉取并运行 ddddocr 的 Web API 容器，映射到宿主机的 7777 端口
+docker run -d -p 7777:8000 --name ddddocr-api mzzsfy/ddddocr:latest
 ---
 
 ## ⚠️ 免责声明
