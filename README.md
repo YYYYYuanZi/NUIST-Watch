@@ -97,6 +97,7 @@ const CONFIG = {
 ```bash
 # 拉取并运行 ddddocr 的 Web API 容器，映射到宿主机的 7777 端口
 docker run -d -p 7777:8000 --name ddddocr-api mzzsfy/ddddocr:latest
+```
 ---
 
 ## ⚠️ 免责声明
